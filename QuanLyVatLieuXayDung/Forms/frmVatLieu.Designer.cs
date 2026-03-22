@@ -263,7 +263,7 @@
             // cboDonViTinh
             // 
             cboDonViTinh.FormattingEnabled = true;
-            cboDonViTinh.Items.AddRange(new object[] { "Tấn", "Cây", "Thùng", "Viên", "Cái", "Bao" });
+            cboDonViTinh.Items.AddRange(new object[] { "Tấn", "Cây", "Thùng", "Viên", "Cái", "Bao", "M" });
             cboDonViTinh.Location = new Point(479, 63);
             cboDonViTinh.Name = "cboDonViTinh";
             cboDonViTinh.Size = new Size(197, 23);
