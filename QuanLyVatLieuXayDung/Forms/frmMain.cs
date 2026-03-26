@@ -184,17 +184,31 @@ namespace QuanLyVatLieuXayDung.Forms
 
         private void mnuThongKeDoanhThu_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void mnuNhaCungCap_Click(object sender, EventArgs e)
         {
-
+            if (nhaCungCap == null || nhaCungCap.IsDisposed)
+            {
+                nhaCungCap = new frmNhaCungCap();
+                nhaCungCap.MdiParent = this;
+                nhaCungCap.Show();
+            }
+            else
+                nhaCungCap.Activate();
         }
 
         private void mnuVatLieu_Click(object sender, EventArgs e)
         {
-
+            if (vatLieu == null || vatLieu.IsDisposed)
+            {
+                vatLieu = new frmVatLieu();
+                vatLieu.MdiParent = this;
+                vatLieu.Show();
+            }
+            else
+                vatLieu.Activate();
         }
 
         private void mnuKhachHang_Click(object sender, EventArgs e)
@@ -211,7 +225,14 @@ namespace QuanLyVatLieuXayDung.Forms
 
         private void mnuNhanVien_Click(object sender, EventArgs e)
         {
-
+            if (nhanVien == null || nhanVien.IsDisposed)
+            {
+                nhanVien = new frmNhanVien();
+                nhanVien.MdiParent = this;
+                nhanVien.Show();
+            }
+            else
+                nhanVien.Activate();
         }
 
         private void mnuHoaDon_Click(object sender, EventArgs e)

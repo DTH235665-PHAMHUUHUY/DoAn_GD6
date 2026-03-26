@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDangNhap));
-            pictureBox1 = new PictureBox();
             btnHuyBo = new Button();
             btnDangNhap = new Button();
             txtMatKhau = new TextBox();
@@ -37,19 +35,9 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(11, 58);
-            pictureBox1.Margin = new Padding(2);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(167, 145);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 15;
-            pictureBox1.TabStop = false;
             // 
             // btnHuyBo
             // 
@@ -122,6 +110,16 @@
             label1.TabIndex = 8;
             label1.Text = "ĐĂNG NHẬP";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.f78e5ba0_f807_4a55_928d_627043f23d26;
+            pictureBox1.Location = new Point(31, 85);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(116, 106);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
+            // 
             // frmDangNhap
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -143,8 +141,6 @@
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
         private Button btnHuyBo;
         private Button btnDangNhap;
         public TextBox txtMatKhau;
@@ -152,5 +148,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }

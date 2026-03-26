@@ -1,4 +1,5 @@
-﻿using QuanLyVatLieuXayDung.Data;
+﻿using ClosedXML.Excel;
+using QuanLyVatLieuXayDung.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -109,12 +110,19 @@ namespace QuanLyVatLieuXayDung.Forms
 
         private void dgvVatLieu_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvVatLieu.Columns[e.ColumnIndex].Name == "HinhAnh")
+            string imagesFolder = Path.Combine(Application.StartupPath, "Images");
+
+            if (e.Value != null)
             {
-                Image image = Image.FromFile(Path.Combine(imagesFolder, e.Value.ToString()));
-                image = new Bitmap(image, 24, 24);
-                e.Value = image;
+                string imagePath = Path.Combine(imagesFolder, e.Value.ToString());
+
+                if (File.Exists(imagePath))
+                {
+                    Image image = Image.FromFile(imagePath);
+                    e.Value = new Bitmap(image, 24, 24);
+                }
             }
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -228,6 +236,125 @@ namespace QuanLyVatLieuXayDung.Forms
                 File.Copy(ofd.FileName, destPath, true);
 
                 picHinhAnh.ImageLocation = destPath;
+            }
+        }
+
+        private void btnNhap_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Nhập dữ liệu từ tập tin Excel";
+            openFileDialog.Filter = "Tập tin Excel|*.xls;*.xlsx";
+            openFileDialog.Multiselect = false;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DataTable table = new DataTable();
+                    using (XLWorkbook workbook = new XLWorkbook(openFileDialog.FileName))
+                    {
+                        IXLWorksheet worksheet = workbook.Worksheet(1);
+                        bool firstRow = true;
+                        string readRange = "1:1";
+
+                        foreach (IXLRow row in worksheet.RowsUsed())
+                        {
+                            if (firstRow)
+                            {
+                                readRange = string.Format("{0}:{1}", 1, row.LastCellUsed().Address.ColumnNumber);
+                                foreach (IXLCell cell in row.Cells(readRange))
+                                {
+                                    table.Columns.Add(cell.Value.ToString());
+                                }
+                                firstRow = false;
+                            }
+                            else
+                            {
+                                table.Rows.Add();
+                                int cellIndex = 0;
+                                foreach (IXLCell cell in row.Cells(readRange))
+                                {
+                                    table.Rows[table.Rows.Count - 1][cellIndex] = cell.Value.ToString();
+                                    cellIndex++;
+                                }
+                            }
+                        }
+                    }
+
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow r in table.Rows)
+                        {
+                            VatLieu sp = new VatLieu();
+                            sp.LoaiVatLieuID = Convert.ToInt32(r["LoaiVatLieuID"]);
+                            sp.NhaCungCapID = Convert.ToInt32(r["NhaCungCapID"]);
+                            sp.TenVatLieu = r["TenVatLieu"].ToString();
+                            sp.SoLuong = Convert.ToInt32(r["SoLuong"]);
+                            sp.DonViTinh = r["DonViTinh"].ToString();
+                            sp.DonGia = Convert.ToInt32(r["DonGia"]);
+                            sp.HinhAnh = r["HinhAnh"].ToString();
+
+                            context.VatLieu.Add(sp);
+                        }
+                        context.SaveChanges();
+                        MessageBox.Show("Đã nhập thành công " + table.Rows.Count + " dòng.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        frmVatLieu_Load(sender, e);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tập tin Excel rỗng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+        private void btnXuat_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Xuất dữ liệu ra tập tin Excel";
+            saveFileDialog.Filter = "Tập tin Excel|*.xls;*.xlsx";
+            saveFileDialog.FileName = "VatLieu_" + DateTime.Now.ToShortDateString().Replace("/", "_") + ".xlsx";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    DataTable table = new DataTable();
+                    table.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID", typeof(int)),
+                new DataColumn("LoaiVatLieuID", typeof(int)),
+                new DataColumn("NhaCungCapID", typeof(int)),
+                new DataColumn("TenVatLieu", typeof(string)),
+                new DataColumn("SoLuong", typeof(int)),
+                new DataColumn("DonViTinh", typeof(string)),
+                new DataColumn("DonGia", typeof(int)),
+                new DataColumn("HinhAnh", typeof(string))
+            });
+
+                    var vatLieuList = context.VatLieu.ToList();
+                    if (vatLieuList != null)
+                    {
+                        foreach (var p in vatLieuList)
+                        {
+                            table.Rows.Add(p.ID, p.LoaiVatLieuID, p.NhaCungCapID, p.TenVatLieu, p.SoLuong, p.DonViTinh, p.DonGia, p.HinhAnh);
+                        }
+                    }
+
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        var sheet = wb.Worksheets.Add(table, "VatLieu");
+                        sheet.Columns().AdjustToContents();
+                        wb.SaveAs(saveFileDialog.FileName);
+                        MessageBox.Show("Đã xuất dữ liệu ra tập tin Excel thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
     }

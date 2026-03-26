@@ -32,6 +32,8 @@
             ID = new DataGridViewTextBoxColumn();
             TenLoai = new DataGridViewTextBoxColumn();
             groupBox1 = new GroupBox();
+            btnXuat = new Button();
+            btnNhap = new Button();
             btnThoat = new Button();
             btnHuyBo = new Button();
             btnXoa = new Button();
@@ -57,7 +59,7 @@
             dgvLoaiVatLieu.Location = new Point(3, 19);
             dgvLoaiVatLieu.MultiSelect = false;
             dgvLoaiVatLieu.Name = "dgvLoaiVatLieu";
-            dgvLoaiVatLieu.Size = new Size(770, 263);
+            dgvLoaiVatLieu.Size = new Size(925, 263);
             dgvLoaiVatLieu.TabIndex = 0;
             // 
             // ID
@@ -74,6 +76,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnXuat);
+            groupBox1.Controls.Add(btnNhap);
             groupBox1.Controls.Add(btnThoat);
             groupBox1.Controls.Add(btnHuyBo);
             groupBox1.Controls.Add(btnXoa);
@@ -84,14 +88,34 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 113);
+            groupBox1.Size = new Size(924, 113);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin loại vật liệu:";
             // 
+            // btnXuat
+            // 
+            btnXuat.Location = new Point(830, 66);
+            btnXuat.Name = "btnXuat";
+            btnXuat.Size = new Size(88, 27);
+            btnXuat.TabIndex = 37;
+            btnXuat.Text = "Xuất.....";
+            btnXuat.UseVisualStyleBackColor = true;
+            btnXuat.Click += btnXuat_Click;
+            // 
+            // btnNhap
+            // 
+            btnNhap.Location = new Point(715, 66);
+            btnNhap.Name = "btnNhap";
+            btnNhap.Size = new Size(88, 27);
+            btnNhap.TabIndex = 36;
+            btnNhap.Text = "Nhập...";
+            btnNhap.UseVisualStyleBackColor = true;
+            btnNhap.Click += btnNhap_Click;
+            // 
             // btnThoat
             // 
-            btnThoat.Location = new Point(672, 68);
+            btnThoat.Location = new Point(609, 66);
             btnThoat.Name = "btnThoat";
             btnThoat.Size = new Size(88, 27);
             btnThoat.TabIndex = 7;
@@ -101,7 +125,7 @@
             // 
             // btnHuyBo
             // 
-            btnHuyBo.Location = new Point(556, 68);
+            btnHuyBo.Location = new Point(493, 66);
             btnHuyBo.Name = "btnHuyBo";
             btnHuyBo.Size = new Size(88, 27);
             btnHuyBo.TabIndex = 6;
@@ -111,7 +135,7 @@
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(440, 68);
+            btnXoa.Location = new Point(377, 66);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(88, 27);
             btnXoa.TabIndex = 5;
@@ -121,7 +145,7 @@
             // 
             // btnLuu
             // 
-            btnLuu.Location = new Point(324, 68);
+            btnLuu.Location = new Point(261, 66);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(88, 27);
             btnLuu.TabIndex = 4;
@@ -131,7 +155,7 @@
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(208, 68);
+            btnSua.Location = new Point(145, 66);
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(88, 27);
             btnSua.TabIndex = 3;
@@ -141,7 +165,7 @@
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(92, 68);
+            btnThem.Location = new Point(29, 66);
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(88, 27);
             btnThem.TabIndex = 2;
@@ -170,7 +194,7 @@
             groupBox2.Controls.Add(dgvLoaiVatLieu);
             groupBox2.Location = new Point(12, 153);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(776, 285);
+            groupBox2.Size = new Size(931, 285);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "danh sách vật liệu:";
@@ -179,7 +203,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(948, 450);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             KeyPreview = true;
@@ -209,5 +233,7 @@
         private TextBox txtTenLoai;
         private Label label1;
         private GroupBox groupBox2;
+        private Button btnXuat;
+        private Button btnNhap;
     }
 }

@@ -41,6 +41,8 @@
             dgvNhaCungCap = new DataGridView();
             ID = new DataGridViewTextBoxColumn();
             TenNhaCungCap = new DataGridViewTextBoxColumn();
+            btnXuat = new Button();
+            btnNhap = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNhaCungCap).BeginInit();
@@ -48,6 +50,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnXuat);
+            groupBox1.Controls.Add(btnNhap);
             groupBox1.Controls.Add(btnThoat);
             groupBox1.Controls.Add(btnHuyBo);
             groupBox1.Controls.Add(btnXoa);
@@ -58,14 +62,14 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 113);
+            groupBox1.Size = new Size(996, 113);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin nhà cung cấp:";
             // 
             // btnThoat
             // 
-            btnThoat.Location = new Point(672, 68);
+            btnThoat.Location = new Point(616, 68);
             btnThoat.Name = "btnThoat";
             btnThoat.Size = new Size(88, 27);
             btnThoat.TabIndex = 7;
@@ -75,7 +79,7 @@
             // 
             // btnHuyBo
             // 
-            btnHuyBo.Location = new Point(556, 68);
+            btnHuyBo.Location = new Point(500, 68);
             btnHuyBo.Name = "btnHuyBo";
             btnHuyBo.Size = new Size(88, 27);
             btnHuyBo.TabIndex = 6;
@@ -85,7 +89,7 @@
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(440, 68);
+            btnXoa.Location = new Point(384, 68);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(88, 27);
             btnXoa.TabIndex = 5;
@@ -95,7 +99,7 @@
             // 
             // btnLuu
             // 
-            btnLuu.Location = new Point(324, 68);
+            btnLuu.Location = new Point(268, 68);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(88, 27);
             btnLuu.TabIndex = 4;
@@ -105,7 +109,7 @@
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(208, 68);
+            btnSua.Location = new Point(152, 68);
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(88, 27);
             btnSua.TabIndex = 3;
@@ -115,7 +119,7 @@
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(92, 68);
+            btnThem.Location = new Point(36, 68);
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(88, 27);
             btnThem.TabIndex = 2;
@@ -144,7 +148,7 @@
             groupBox2.Controls.Add(dgvNhaCungCap);
             groupBox2.Location = new Point(12, 153);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(776, 285);
+            groupBox2.Size = new Size(996, 285);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "danh sách nhà cung cấp:";
@@ -160,7 +164,7 @@
             dgvNhaCungCap.Location = new Point(3, 19);
             dgvNhaCungCap.MultiSelect = false;
             dgvNhaCungCap.Name = "dgvNhaCungCap";
-            dgvNhaCungCap.Size = new Size(770, 263);
+            dgvNhaCungCap.Size = new Size(990, 263);
             dgvNhaCungCap.TabIndex = 0;
             // 
             // ID
@@ -175,11 +179,31 @@
             TenNhaCungCap.HeaderText = "Tên nhà cung cấp";
             TenNhaCungCap.Name = "TenNhaCungCap";
             // 
+            // btnXuat
+            // 
+            btnXuat.Location = new Point(854, 68);
+            btnXuat.Name = "btnXuat";
+            btnXuat.Size = new Size(88, 27);
+            btnXuat.TabIndex = 37;
+            btnXuat.Text = "Xuất.....";
+            btnXuat.UseVisualStyleBackColor = true;
+            btnXuat.Click += btnXuat_Click;
+            // 
+            // btnNhap
+            // 
+            btnNhap.Location = new Point(743, 68);
+            btnNhap.Name = "btnNhap";
+            btnNhap.Size = new Size(88, 27);
+            btnNhap.TabIndex = 36;
+            btnNhap.Text = "Nhập...";
+            btnNhap.UseVisualStyleBackColor = true;
+            btnNhap.Click += btnNhap_Click;
+            // 
             // frmNhaCungCap
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1020, 450);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             KeyPreview = true;
@@ -209,5 +233,7 @@
         private DataGridView dgvNhaCungCap;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn TenNhaCungCap;
+        private Button btnXuat;
+        private Button btnNhap;
     }
 }
